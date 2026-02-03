@@ -1,0 +1,16 @@
+{
+  "name": "ufc-stat-scraper-v2",
+  "version": "1.0.0",
+  "description": "playwright scraper for ufc statistics",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "hrrsnsu",
+  "license": "ISC",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "dotenv": "^17.2.3",
+    "playwright": "^1.58.1"
+  }
+}
