@@ -18,7 +18,7 @@ async function setup() {
 			);
     	`;
 
-		//Create fighters table
+        //Create fighters table
         await sql`DROP TABLE IF EXISTS fighters`;
         await sql`
 			CREATE TABLE fighters (
@@ -26,10 +26,10 @@ async function setup() {
 				first_name VARCHAR(255) NOT NULL,
 				last_name VARCHAR(255),
 				age INT,
-				country VARCHAR(255),
-				height INT,
+				height VARCHAR(255),
 				weight INT,
 				reach INT,
+				stance VARCHAR(255),
 				slmp DECIMAL,
 				strAcc DECIMAL,
 				sapm DECIMAL,
@@ -38,12 +38,10 @@ async function setup() {
 				tdAcc DECIMAL,
 				tdDef DECIMAL,
 				subAvg DECIMAL,
-				next_event_id INT REFERENCES ufc_events(id),
-				last_event_id INT REFERENCES ufc_events(id)
 			);
 		`;
 
-		console.log('Finished creating tables.')
+        console.log('Finished creating tables.');
     } catch (err) {
         console.error('Connection failed.', err);
     }
