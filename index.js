@@ -63,8 +63,8 @@ async function scrapeFighters(context) {
             await page.goto(link);
             const fighterData = await parseFighterPage(page);
             await sql`
-                INSERT INTO fighters (first_name, last_name, age, height, weight, reach, stance, slmp, strAcc, sapm, strDef, tdAvg, tdAcc, tdDef, subAvg)
-                VALUES (${fighterData.first_name}, ${fighterData.last_name}, ${fighterData.age}, ${fighterData.height}, ${fighterData.weight}, ${fighterData.reach}, ${fighterData.stance}, ${fighterData.slmp}, ${fighterData.strAcc}, ${fighterData.sapm}, ${fighterData.strDef}, ${fighterData.tdAvg}, ${fighterData.tdAcc}, ${fighterData.tdDef}, ${fighterData.subAvg});
+                INSERT INTO fighters (first_name, last_name, height, weight, reach, stance, slpm, strAcc, sapm, strDef, tdAvg, tdAcc, tdDef, subAvg)
+                VALUES (${fighterData.first_name}, ${fighterData.last_name}, ${fighterData.height}, ${fighterData.weight}, ${fighterData.reach}, ${fighterData.stance}, ${fighterData.slpm}, ${fighterData.strAcc}, ${fighterData.sapm}, ${fighterData.strDef}, ${fighterData.tdAvg}, ${fighterData.tdAcc}, ${fighterData.tdDef}, ${fighterData.subAvg});
             `;
         }
     }
@@ -131,7 +131,7 @@ async function parseFighterPage(page) {
             } else if (category.includes('Reach')) {
                 tempObj.reach =
                     value === '--' ? null : parseInt(value.replace('"', ''));
-            } else if (category.includes('Stance')) {
+            } else if (category.includes('STANCE')) {
                 tempObj.stance = value === '--' ? null : value;
             } else if (category.includes('SLpM')) {
                 tempObj.slpm = value === '0.00' ? null : Number(value);
@@ -141,8 +141,7 @@ async function parseFighterPage(page) {
             } else if (category.includes('SApM')) {
                 tempObj.sapm = value === '0.00' ? null : Number(value);
             } else if (category.includes('Str. Def')) {
-                tempObj.strDef =
-                    value === '0%' ? null : parseFloat(value) / 100;
+                tempObj.strDef = value === '0%' ? null : parseFloat(value) / 100;
             } else if (category.includes('TD Avg')) {
                 tempObj.tdAvg = value === '0.00' ? null : Number(value);
             } else if (category.includes('TD Acc')) {
